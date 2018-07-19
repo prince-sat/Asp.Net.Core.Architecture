@@ -32,6 +32,10 @@ namespace Asp.Net.Core.DataAccessLayer.Migration.Scaffolding
             //AlbumCreator: Création des données 
             albumCreator.Create();
 
+            //PhotoCreator : Création des données 
+            photoCreator.albumCreator = albumCreator;
+            photoCreator.Create();
+
 
             context.Logger.Information("[Scaffolding] - Fin de l'initialisation de la base de données");
         }
