@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Asp.Net.Core.DataAccessLayer.Migration.Builders.Base
+namespace Asp.Net.Core.DataAccessLayer
 {
     /// <summary>
     /// Classe de base pour les builders

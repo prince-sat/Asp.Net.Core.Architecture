@@ -1,5 +1,4 @@
-﻿using Asp.Net.Core.DataAccessLayer.Migration.Builders.Base;
-using Asp.Net.Core.Models.Models;
+﻿using Asp.Net.Core.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;

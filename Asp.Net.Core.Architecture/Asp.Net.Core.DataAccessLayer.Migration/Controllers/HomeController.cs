@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Asp.Net.Core.DataAccessLayer.Migration.Controllers
+namespace Asp.Net.Core.DataAccessLayer
 {
     public class HomeController : Controller
     {
