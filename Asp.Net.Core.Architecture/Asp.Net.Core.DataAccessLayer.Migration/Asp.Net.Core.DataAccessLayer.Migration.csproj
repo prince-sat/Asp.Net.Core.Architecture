@@ -33,8 +33,4 @@
     <ProjectReference Include="..\Asp.Net.Core.Transverse.Logger\Asp.Net.Core.Transverse.Logger.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Scaffolding\Creators\" />
-  </ItemGroup>
-
 </Project>
