@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Asp.Net.Core.Helpers\Asp.Net.Core.Helpers.csproj" />
+    <ProjectReference Include="..\Asp.Net.Core.Models\Asp.Net.Core.Models.csproj" />
+  </ItemGroup>
+ </Project>

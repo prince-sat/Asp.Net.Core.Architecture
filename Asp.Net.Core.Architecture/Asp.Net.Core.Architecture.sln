@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transverse", "Transverse", "{44FCBC1B-2778-42E3-8C92-0458070DC12C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Transverse", "0-Transverse", "{44FCBC1B-2778-42E3-8C92-0458070DC12C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.Helpers", "Asp.Net.Core.Helpers\Asp.Net.Core.Helpers.csproj", "{D8590506-9583-45A2-837C-0C4FA03B9337}"
 EndProject
@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.Transverse.Log
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.Transverse.Security", "Asp.Net.Core.Transverse.Security\Asp.Net.Core.Transverse.Security.csproj", "{AB849334-8417-46C7-B1AD-E3CEB4E464C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{B346AAF6-8484-4A63-BEEC-EB7331031BAD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Persistence", "1-Persistence", "{B346AAF6-8484-4A63-BEEC-EB7331031BAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.Models", "Asp.Net.Core.Models\Asp.Net.Core.Models.csproj", "{F43396FF-C1D3-4FCC-BD72-DA313254CFDF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.DataAccessLayer.Migration", "Asp.Net.Core.DataAccessLayer.Migration\Asp.Net.Core.DataAccessLayer.Migration.csproj", "{47BBC8AD-A639-4051-BCE6-4D9CBF8C236C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.Net.Core.DataAccessLayer.Interface", "Asp.Net.Core.DataAccessLayer.Interface\Asp.Net.Core.DataAccessLayer.Interface.csproj", "{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{47BBC8AD-A639-4051-BCE6-4D9CBF8C236C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47BBC8AD-A639-4051-BCE6-4D9CBF8C236C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47BBC8AD-A639-4051-BCE6-4D9CBF8C236C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{AB849334-8417-46C7-B1AD-E3CEB4E464C2} = {44FCBC1B-2778-42E3-8C92-0458070DC12C}
 		{F43396FF-C1D3-4FCC-BD72-DA313254CFDF} = {B346AAF6-8484-4A63-BEEC-EB7331031BAD}
 		{47BBC8AD-A639-4051-BCE6-4D9CBF8C236C} = {B346AAF6-8484-4A63-BEEC-EB7331031BAD}
+		{EB6DD1E6-4684-4EA9-A1C8-D1704A04531E} = {B346AAF6-8484-4A63-BEEC-EB7331031BAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {29DD86BE-14CC-49E8-A32D-92025AAF4906}

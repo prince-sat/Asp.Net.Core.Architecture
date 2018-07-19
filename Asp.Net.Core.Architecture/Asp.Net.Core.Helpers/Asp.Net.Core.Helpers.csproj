@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.2" />
+    <PackageReference Include="System.Linq.Parallel" Version="4.3.0" />
+    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Utilitaires\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Asp.Net.Core.Models\Asp.Net.Core.Models.csproj" />
   </ItemGroup>
 
 </Project>
