@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Asp.Net.Core.DataAccessLayer.Interface\Asp.Net.Core.DataAccessLayer.Interface.csproj" />
     <ProjectReference Include="..\Asp.Net.Core.Models\Asp.Net.Core.Models.csproj" />
+    <ProjectReference Include="..\Asp.Net.Core.Transverse.Logger\Asp.Net.Core.Transverse.Logger.csproj" />
   </ItemGroup>
 
   <ItemGroup>
