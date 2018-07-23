@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Asp.Net.Core.DataAccessLayer.Implementation.Builders
+namespace Asp.Net.Core.DataAccessLayer.Implementation
 {
-
     internal class PhotoModelBuilder : BaseBuilder<Photo>
     {
         protected override void BuildModel(EntityTypeBuilder<Photo> entity)
@@ -16,5 +16,4 @@ namespace Asp.Net.Core.DataAccessLayer.Implementation.Builders
             entity.Property(p => p.AlbumId).IsRequired();
         }
     }
-       
 }

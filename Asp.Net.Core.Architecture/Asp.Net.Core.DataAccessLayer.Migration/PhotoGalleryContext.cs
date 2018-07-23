@@ -21,6 +21,10 @@ namespace Asp.Net.Core.DataAccessLayer.Migration
         public PhotoGalleryContext(DbContextOptions options) : base(options)
         {
         }
+
+        public PhotoGalleryContext() 
+        {
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())

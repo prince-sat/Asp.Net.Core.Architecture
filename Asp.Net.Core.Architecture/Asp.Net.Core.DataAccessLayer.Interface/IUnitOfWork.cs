@@ -9,8 +9,7 @@ namespace Asp.Net.Core.DataAccessLayer.Interface
 {
     public interface IUnitOfWork
     {
-        ILoggingRepository ErrorRepository { get; }
-
+        ILoggingRepository LoggingRepository { get; }
         IAlbumRepository AlbumRepository { get; }
         IPhotoRepository PhotoRepository { get; }
         IRoleRepository RoleRepository { get; }
@@ -27,6 +26,8 @@ namespace Asp.Net.Core.DataAccessLayer.Interface
         /// </summary>
         /// <returns>Code de retour</returns>
         Task<int> SaveAsync();
+
+      
 
     }
 }

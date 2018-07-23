@@ -17,6 +17,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.3" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="2.4.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +33,10 @@
     <ProjectReference Include="..\Asp.Net.Core.DataAccessLayer.Interface\Asp.Net.Core.DataAccessLayer.Interface.csproj" />
     <ProjectReference Include="..\Asp.Net.Core.Models\Asp.Net.Core.Models.csproj" />
     <ProjectReference Include="..\Asp.Net.Core.Transverse.Logger\Asp.Net.Core.Transverse.Logger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="logs\" />
   </ItemGroup>
 
 </Project>

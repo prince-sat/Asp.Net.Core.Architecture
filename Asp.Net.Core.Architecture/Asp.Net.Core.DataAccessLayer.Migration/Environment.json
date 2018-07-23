@@ -1,0 +1,4 @@
+﻿{
+  // "MYPROJECT_ENVIRONMENT": "Integration"
+  "MYPROJECT_ENVIRONMENT": "Development"
+}

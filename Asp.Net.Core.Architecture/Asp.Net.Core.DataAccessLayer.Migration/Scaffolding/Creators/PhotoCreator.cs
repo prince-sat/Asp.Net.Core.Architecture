@@ -14,14 +14,23 @@ namespace Asp.Net.Core.DataAccessLayer.Migration.Scaffolding.Creators
     {
         public AlbumCreator albumCreator { get; set; }
         public List<Photo> photos { get; private set; }
-        public PhotoCreator(DbInitializerContext context) : base(context)
+        public string[] Images { get; set; }
+
+        public PhotoCreator(DbInitializerContext context, string applicationPath) : base(context)
         {
             photos = new List<Photo>();
+            Images = Directory.GetFiles(Path.Combine(applicationPath, "images"));
         }
         public override void Create()
         {
-            throw new NotImplementedException();
+            foreach (string _image in Images)
+            {
+                int _selectedAlbum = rnd.Next(1, 4);
+                CreatePhoto(_image, _selectedAlbum);
+            }
         }
+
+        Random rnd = new Random();
         private Photo CreatePhoto(string image, int _selectedAlbum)
         {
             string _fileName = Path.GetFileName(image);
@@ -34,7 +43,7 @@ namespace Asp.Net.Core.DataAccessLayer.Migration.Scaffolding.Creators
                     Title = _fileName,
                     DateUploaded = DateTime.Now,
                     Uri = _fileName,
-                    Album = albumCreator.Albums.ElementAt(_selectedAlbum)
+                    AlbumId = albumCreator.Albums.ElementAt(_selectedAlbum).Id
                 };
                 Context.UnitOfWork.PhotoRepository.Add(result);
                 Context.UnitOfWork.Save();

@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Asp.Net.Core.Transverse.Logger.Interface;
+using Serilog;
 using Serilog.Events;
 using System;
 
@@ -8,7 +9,7 @@ namespace Asp.Net.Core.Transverse.Logger
     /// <summary xml:lang="fr">
     /// Logger se basant sur SeriLog
     /// </summary>
-    public class SerilogLogger<T> 
+    public class SerilogLogger<T> :  IGenericLogger<T>
     {
         private string _callerName;
 

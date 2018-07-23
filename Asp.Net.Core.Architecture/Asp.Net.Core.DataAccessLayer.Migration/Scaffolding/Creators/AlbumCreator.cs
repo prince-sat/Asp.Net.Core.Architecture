@@ -9,7 +9,7 @@ namespace Asp.Net.Core.DataAccessLayer.Migration.Scaffolding.Creators
     /// <summary>
     /// Classe de création d'une entité Album
     /// </summary>
-    internal  class AlbumCreator : BaseCreator
+    internal class AlbumCreator : BaseCreator
     {
         public List<Album> Albums { get; set; }
         public AlbumCreator(DbInitializerContext context) : base(context)
@@ -59,10 +59,9 @@ namespace Asp.Net.Core.DataAccessLayer.Migration.Scaffolding.Creators
             //Si il existe pas en bdd on le crée
             if (result == null)
             {
-
-                Context.UnitOfWork.AlbumRepository.Add(album);
+                result = new Album { Title = album.Title, Description = album.Description, DateCreated = album.DateCreated };
+                Context.UnitOfWork.AlbumRepository.Add(result);
                 Context.UnitOfWork.Save();
-
                 Context.Logger.Information("Album {Title} ajoutée", album.Title);
             }
             Albums.Add(result);

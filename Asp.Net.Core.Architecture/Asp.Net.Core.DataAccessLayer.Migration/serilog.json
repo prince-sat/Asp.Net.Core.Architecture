@@ -1,0 +1,26 @@
+﻿{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.RollingFile" ],
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "RollingFile",
+        "Args": {
+          "pathFormat": "logs\\Asp.Net.Core.DataAccessLayer.Migration-{Date}.log",
+          "outputTemplate": "{Timestamp:yyyy--MM-dd HH:mm:ss.fff} [{Level}] {Caller} {Message}{NewLine}{Exception}",
+          "fileSizeLimitBytes": 104857600 //100Mo
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+    "Properties": {
+      "Application": "Asp.Net.Core.DataAccessLayer.Migration"
+    }
+  }
+}

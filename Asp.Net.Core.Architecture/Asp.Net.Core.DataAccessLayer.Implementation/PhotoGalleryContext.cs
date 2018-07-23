@@ -1,12 +1,11 @@
-﻿using Asp.Net.Core.DataAccessLayer.Implementation.Builders;
-using Asp.Net.Core.Models.Models;
+﻿using Asp.Net.Core.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Asp.Net.Core.DataAccessLayer.Implementation
 {
@@ -19,8 +18,19 @@ namespace Asp.Net.Core.DataAccessLayer.Implementation
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Error> Errors { get; set; }
 
+
+
         public PhotoGalleryContext(DbContextOptions options) : base(options)
         {
+        }
+
+        public PhotoGalleryContext()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\V11.0;Initial Catalog=PhotoGallery;Integrated Security=True;Pooling=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +59,7 @@ namespace Asp.Net.Core.DataAccessLayer.Implementation
 
         }
 
+
+
     }
 }
-
