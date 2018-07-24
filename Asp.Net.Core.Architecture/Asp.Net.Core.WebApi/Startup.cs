@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Asp.Net.Core.DataAccessLayer.Interface;
+using Asp.Net.Core.DataAccessLayer.Implementation;
 using Asp.Net.Core.DataAccessLayer.Implementation.Scaffolding;
+using Asp.Net.Core.DataAccessLayer.Interface;
 using Asp.Net.Core.Helpers.Extensions;
 using Asp.Net.Core.Transverse.Logger;
 using Asp.Net.Core.Transverse.Logger.Interface;
@@ -18,7 +19,7 @@ namespace Asp.Net.Core.WebApi
 {
     public class Startup
     {
-        private IConfigurationRoot _configuration { get; }
+        public IConfigurationRoot Configuration { get; }
         private static string _applicationPath = string.Empty;
         private static string _contentRootPath = string.Empty;
         public Startup(IHostingEnvironment env)
@@ -34,30 +35,19 @@ namespace Asp.Net.Core.WebApi
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
+            string connectionString = Configuration.GetConnectionString("PhotoGalleryConnection");
+            // Accès au contexte de données
+            services.AddDbContext<PhotoGalleryContext>(options => options.UseSqlServer(connectionString));
+
+
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(_configuration);
-
-            string sqlConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
-            bool useInMemoryProvider = bool.Parse(Configuration["Data:PhotoGalleryConnection:InMemoryProvider"]);
-
-            services.AddDbContext<PhotoGalleryContext>(options =>
-            {
-                switch (useInMemoryProvider)
-                {
-                    case true:
-                        options.UseInMemoryDatabase();
-                        break;
-                    default:
-                        options.UseSqlServer(sqlConnectionString);
-                        break;
-                }
-            });
+            services.AddApplicationInsightsTelemetry(Configuration);
 
             // Accès aux données
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -25,9 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.DataAccessLaye
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Business", "2-Business", "{E1A5F9FD-7681-4E31-87D9-2BB8EDC4CF17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.Net.Core.BusinessLayer", "Asp.Net.Core.BusinessLayer\Asp.Net.Core.BusinessLayer.csproj", "{6CCB532E-8D0C-414B-BF43-9C0508B6C80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.BusinessLayer", "Asp.Net.Core.BusinessLayer\Asp.Net.Core.BusinessLayer.csproj", "{6CCB532E-8D0C-414B-BF43-9C0508B6C80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.Net.Core.WebApi", "Asp.Net.Core.WebApi\Asp.Net.Core.WebApi.csproj", "{E5F54E83-7541-4CAC-BF93-43AFDFA487F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.Net.Core.WebApi", "Asp.Net.Core.WebApi\Asp.Net.Core.WebApi.csproj", "{E5F54E83-7541-4CAC-BF93-43AFDFA487F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

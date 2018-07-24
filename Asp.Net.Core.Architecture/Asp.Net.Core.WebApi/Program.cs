@@ -42,6 +42,7 @@ namespace Asp.Net.Core.WebApi
                .UseIISIntegration()
                .UseStartup<Startup>()
                .UseSerilog()
+               .UseApplicationInsights()
                .Build();
         }
 
