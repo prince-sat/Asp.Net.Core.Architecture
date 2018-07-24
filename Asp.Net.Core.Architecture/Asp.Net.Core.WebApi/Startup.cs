@@ -121,7 +121,7 @@ namespace Asp.Net.Core.WebApi
                     HttpMethods.Head.ToLower() //Pour le ping
                     );
                 //Script permettant d'injecter le token xsrf dans l'entête HTTP à chaque requête POST, PUT, DELETE et PATCH envoyée
-                options.InjectOnCompleteJavaScript($"{SwaggerUI.SwaggerUIRootPath}/swaggerui-xsrf-injector.js");
+               // options.InjectOnCompleteJavaScript($"{SwaggerUI.SwaggerUIRootPath}/swaggerui-xsrf-injector.js");
                 //Configuration du endpoint de swagger ui
                 options.SwaggerEndpoint($"{SwaggerUI.SwaggerRootPath}/v1/swagger.json", $"Asp.net Core WebApi V1");
             });
