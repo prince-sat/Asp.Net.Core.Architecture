@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Asp.Net.Core.BusinessLayer.Interfaces;
+using Asp.Net.Core.BusinessLayer.Services;
 using Asp.Net.Core.DataAccessLayer.Implementation;
 using Asp.Net.Core.DataAccessLayer.Implementation.Scaffolding;
 using Asp.Net.Core.DataAccessLayer.Interface;
 using Asp.Net.Core.Helpers.Extensions;
 using Asp.Net.Core.Transverse.Logger;
 using Asp.Net.Core.Transverse.Logger.Interface;
+using Asp.Net.Core.WebApi.Constantes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Asp.Net.Core.WebApi
 {
@@ -40,14 +48,35 @@ namespace Asp.Net.Core.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             string connectionString = Configuration.GetConnectionString("PhotoGalleryConnection");
-            // Accès au contexte de données
-            services.AddDbContext<PhotoGalleryContext>(options => options.UseSqlServer(connectionString));
-
 
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+
+            // Add framework services.
+            services.AddMvc();
+
+            //Swagger
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "Asp.net Core WebApi",
+                        Version = "v1"
+                    });
+                //options.IncludeXmlComments(Path.ChangeExtension(Assembly.GetEntryAssembly().Location, "xml"));
+                options.DescribeAllEnumsAsStrings();
+            });
+
+            // Accès au contexte de données
+            services.AddMemoryCache();
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            // Accès au contexte de données
+            services.AddDbContext<PhotoGalleryContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<SqlConnection>(e => new SqlConnection(connectionString));
 
             // Accès aux données
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -55,9 +84,11 @@ namespace Asp.Net.Core.WebApi
             //Logger
             services.AddSingleton(typeof(IGenericLogger), typeof(SerilogLogger<object>));
             services.AddSingleton(typeof(IGenericLogger<>), typeof(SerilogLogger<>));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ICacheManager, CacheManager>();
 
-            // Add framework services.
-            services.AddMvc();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,16 +108,27 @@ namespace Asp.Net.Core.WebApi
             }
 
             app.UseStaticFiles();
+            app.UseMvc();
+            app.UseSwagger();
 
-            app.UseMvc(routes =>
+            app.UseSwaggerUI(options =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                options.SupportedSubmitMethods(HttpMethods.Get.ToLower(),
+                    HttpMethods.Post.ToLower(),
+                    HttpMethods.Patch.ToLower(),
+                    HttpMethods.Put.ToLower(),
+                    HttpMethods.Delete.ToLower(),
+                    HttpMethods.Head.ToLower() //Pour le ping
+                    );
+                //Script permettant d'injecter le token xsrf dans l'entête HTTP à chaque requête POST, PUT, DELETE et PATCH envoyée
+                options.InjectOnCompleteJavaScript($"{SwaggerUI.SwaggerUIRootPath}/swaggerui-xsrf-injector.js");
+                //Configuration du endpoint de swagger ui
+                options.SwaggerEndpoint($"{SwaggerUI.SwaggerRootPath}/v1/swagger.json", $"Asp.net Core WebApi V1");
             });
 
-            InitializeDatabase(app.ApplicationServices);
-            // DbInitializer.Initialize(app.ApplicationServices, _applicationPath);
+
+           // InitializeDatabase(app.ApplicationServices);
+          
         }
 
         #region Private methods
