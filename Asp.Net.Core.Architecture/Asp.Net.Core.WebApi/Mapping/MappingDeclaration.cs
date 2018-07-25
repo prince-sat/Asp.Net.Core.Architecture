@@ -1,4 +1,5 @@
 ﻿using Asp.Net.Core.DTO.Habilitation;
+using Asp.Net.Core.DTO.PhotoGallery;
 using Asp.Net.Core.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace Asp.Net.Core.WebApi.Mapping
             // Déclaration des éléments à mapper dans l'ordre alphabétique.
             OneWayMapping<Role, RoleDTO>();
             OneWayMapping<RoleDTO, Role>();
+
+            OneWayMapping<Photo, PhotoDTO>();
+            OneWayMapping<PhotoDTO, Photo>();
+
+            OneWayMapping<Album, AlbumDTO>();
+            OneWayMapping<AlbumDTO, Album>();
+
             InitializeMapper();
         }
 

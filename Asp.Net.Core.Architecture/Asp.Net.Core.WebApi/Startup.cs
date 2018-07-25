@@ -94,6 +94,7 @@ namespace Asp.Net.Core.WebApi
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<ICacheManager, CacheManager>();
             services.AddSingleton<IRoleService, RoleService>();
+            services.AddSingleton<ILoggingService, LoggingService>();
 
 
 

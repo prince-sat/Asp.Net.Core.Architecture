@@ -43,28 +43,30 @@ namespace Asp.Net.Core.WebApi.Controllers.PhotoGallery
         /// <summary>
         /// Get List of photos
         /// </summary>
+        /// <param name="id">identifiant album</param>
+        /// <param name="page">number of page</param>
+        /// <param name="pageSize">page size</param>
         /// <returns></returns>
-        [HttpGet("{page:int=0}/{pageSize=12}")]
+        [HttpGet()]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response<List<PhotoDTO>>))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, typeof(Response<List<PhotoDTO>>))]
         [SwaggerResponse((int)HttpStatusCode.Forbidden)]
         [CustomSwaggerOperation(typeof(PhotosController))]
         [Route("")]
 
-        public ActionResult Get([FromQuery]int? page, [FromQuery]int? pageSize, [FromQuery]int? id = null)
+        public ActionResult Get(int? id = null, int? page = 0, int? pageSize = 12)
         {
             Response<PaginationSet<PhotoDTO>> result = InvokeDataResponse(messagesContainer =>
             {
 
                 PaginationSet<PhotoDTO> pagedSet = null;
                 IEnumerable<PhotoDTO> _photosDto = null;
-                List<Photo> _photos = null;
+                List<Photo> _photos = new List<Photo>();
                 try
                 {
 
 
-                    int currentPage = page.Value;
-                    int currentPageSize = pageSize.Value;
+
                     if (id.HasValue)
                     {
                         var model = _unitOfWork.PhotoRepository.GetSingle(id.Value);
@@ -72,15 +74,17 @@ namespace Asp.Net.Core.WebApi.Controllers.PhotoGallery
                         _photosDto = Mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoDTO>>(_photos);
                         pagedSet = new PaginationSet<PhotoDTO>()
                         {
-                            Page = currentPage,
+                            Page = 0,
                             TotalCount = 1,
-                            TotalPages = (int)Math.Ceiling((decimal)1 / currentPageSize),
+                            TotalPages = (int)Math.Ceiling((decimal)1 / 12),
                             Items = _photosDto
                         };
                     }
                     else
                     {
                         int _totalPhotos = new int();
+                        int currentPage = page.Value;
+                        int currentPageSize = pageSize.Value;
                         _photos = _unitOfWork.PhotoRepository
                        .AllIncluding(p => p.Album)
                        .OrderBy(p => p.Id)
@@ -113,6 +117,7 @@ namespace Asp.Net.Core.WebApi.Controllers.PhotoGallery
         /// <summary>
         /// Delete photo
         /// </summary>
+        /// <param name="id">Album identifiant</param>
         /// <returns></returns>
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(Response<VoidDTO>))]

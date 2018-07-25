@@ -11,6 +11,7 @@ namespace Asp.Net.Core.WebApi.Constantes
         public const string SwaggerUIRootPath = "/swagger-ui";
         public const string HabilitationTag = "Habilitation";
         public const string PhotoGalleryTag = "PhotoGallery";
+        
 
     }
 }
