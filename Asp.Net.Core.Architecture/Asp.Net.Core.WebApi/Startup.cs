@@ -11,6 +11,8 @@ using Asp.Net.Core.DataAccessLayer.Implementation;
 using Asp.Net.Core.DataAccessLayer.Implementation.Scaffolding;
 using Asp.Net.Core.DataAccessLayer.Interface;
 using Asp.Net.Core.Helpers.Extensions;
+using Asp.Net.Core.Models.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 using Asp.Net.Core.Transverse.Logger;
 using Asp.Net.Core.Transverse.Logger.Interface;
 using Asp.Net.Core.WebApi.Constantes;
