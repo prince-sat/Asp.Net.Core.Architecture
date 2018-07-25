@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Asp.Net.Core.BusinessLayer.Habilitation
+namespace Asp.Net.Core.DTO.Habilitation
 {
     public class RoleDTO
     {

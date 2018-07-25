@@ -1,4 +1,4 @@
-﻿using Asp.Net.Core.BusinessLayer.Habilitation;
+﻿using Asp.Net.Core.DTO.Habilitation;
 using Asp.Net.Core.Models.Models;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Asp.Net.Core.BusinessLayer.Habilitation;
+using Asp.Net.Core.DTO.Habilitation;
 using Asp.Net.Core.BusinessLayer.Interfaces;
 using Asp.Net.Core.DataAccessLayer.Interface;
 using Asp.Net.Core.Models.Models;
