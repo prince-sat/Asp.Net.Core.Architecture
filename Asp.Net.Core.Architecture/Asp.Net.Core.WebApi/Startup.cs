@@ -14,6 +14,7 @@ using Asp.Net.Core.Helpers.Extensions;
 using Asp.Net.Core.Transverse.Logger;
 using Asp.Net.Core.Transverse.Logger.Interface;
 using Asp.Net.Core.WebApi.Constantes;
+using Asp.Net.Core.WebApi.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,8 @@ namespace Asp.Net.Core.WebApi
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; }
+        private readonly IHostingEnvironment _env;
+        private IConfigurationRoot _configuration { get; }
         private static string _applicationPath = string.Empty;
         private static string _contentRootPath = string.Empty;
         public Startup(IHostingEnvironment env)
@@ -40,7 +42,12 @@ namespace Asp.Net.Core.WebApi
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            _configuration = builder.Build();
+            _env = env;
+
+            //Initialisation d'automapper
+            MappingDeclaration mapping = new MappingDeclaration();
+            mapping.Activated();
         }
 
 
@@ -48,10 +55,10 @@ namespace Asp.Net.Core.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("PhotoGalleryConnection");
+            string connectionString = _configuration.GetConnectionString("PhotoGalleryConnection");
 
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddApplicationInsightsTelemetry(_configuration);
 
             // Add framework services.
             services.AddMvc();
@@ -72,7 +79,7 @@ namespace Asp.Net.Core.WebApi
             // Accès au contexte de données
             services.AddMemoryCache();
 
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IConfiguration>(_configuration);
 
             // Accès au contexte de données
             services.AddDbContext<PhotoGalleryContext>(options => options.UseSqlServer(connectionString));
@@ -86,6 +93,7 @@ namespace Asp.Net.Core.WebApi
             services.AddSingleton(typeof(IGenericLogger<>), typeof(SerilogLogger<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<ICacheManager, CacheManager>();
+            services.AddSingleton<IRoleService, RoleService>();
 
 
 
@@ -94,7 +102,7 @@ namespace Asp.Net.Core.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
@@ -121,14 +129,14 @@ namespace Asp.Net.Core.WebApi
                     HttpMethods.Head.ToLower() //Pour le ping
                     );
                 //Script permettant d'injecter le token xsrf dans l'entête HTTP à chaque requête POST, PUT, DELETE et PATCH envoyée
-               // options.InjectOnCompleteJavaScript($"{SwaggerUI.SwaggerUIRootPath}/swaggerui-xsrf-injector.js");
+                // options.InjectOnCompleteJavaScript($"{SwaggerUI.SwaggerUIRootPath}/swaggerui-xsrf-injector.js");
                 //Configuration du endpoint de swagger ui
                 options.SwaggerEndpoint($"{SwaggerUI.SwaggerRootPath}/v1/swagger.json", $"Asp.net Core WebApi V1");
             });
 
 
-           // InitializeDatabase(app.ApplicationServices);
-          
+            // InitializeDatabase(app.ApplicationServices);
+
         }
 
         #region Private methods
